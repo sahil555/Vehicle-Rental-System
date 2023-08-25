@@ -3,22 +3,22 @@ import datetime,random
 class Vehicle:
     inventorylist = []
 
-    def __init__(self,typeOfvehicle,license_no,rentedOrNot):
-        self.inventorylist.append([typeOfvehicle, license_no , rentedOrNot,None] )    
+    def __init__(self,typeofvehicle,license_no,rentedornot):
+        self.inventorylist.append([typeofvehicle, license_no , rentedornot,None] )    
 
-    def displayVehicle(self):
+    def displayvehicle(self):
         for i in self.inventorylist:
             print(i)
 
-    def rentvehicle(self,license_no,Name):
+    def rentvehicle(self,license_no,name):
         for i in self.inventorylist:
             if str(license_no) in i[1]:
                 i[2] = True
-                i[3] = Name
+                i[3] = name
 
 
 
-    def returnvehicle(self,rentalTime,license_no,rentalBasis):
+    def returnvehicle(self,rentaltime,license_no,rentalbasis):
         """
         1. Accept a rented Vehicle from a customer
         2. Replensihes the inventory
@@ -34,19 +34,19 @@ class Vehicle:
 
         bill = 0
 
-        if rentalTime:
+        if rentaltime:
             now = datetime.datetime.now()
-            print(rentalTime,now)
-            rentalPeriod = now - rentalTime
+            print(rentaltime,now)
+            rentalperiod = now - rentaltime
 
                 
             # daily bill calculation
-            if rentalBasis == 20:
-                bill = round(rentalPeriod.days) * 20 
+            if rentalbasis == 1800:
+                bill = round(rentalperiod.days) * 1800 
                 
             # weekly bill calculation
-            elif rentalBasis == 60:
-                bill = round(rentalPeriod.days / 7) * 60
+            elif rentalbasis == 9000:
+                bill = round(rentalperiod.days / 7) * 9000
             
                
 
@@ -63,15 +63,15 @@ class Vehicle:
    
 
 class Customer:
-    rentedVehicle = []
+    rentedvehicle = []
 
-    def __init__(self,Name):
-        self.Name = Name
-        self.rentalTime = ''
-        self.rentalBasis = ''
+    def __init__(self,name):
+        self.name = name
+        self.rentaltime = ''
+        self.rentalbasis = ''
         self.vehicle = ''
     
-    def requestvehicle(self,rentalBasis,day):
+    def requestvehicle(self,rentalbasis,day):
         """
         Takes a request from the customer for the number of Vehicles.
         """
@@ -79,17 +79,17 @@ class Customer:
         vehicle = input("Enter Vehicle's License Number: ")
         
 
-        if vehicle in self.rentedVehicle:
+        if vehicle in self.rentedvehicle:
             print("This is already Rented Vehicle")
         else:
-            self.rentedVehicle.append([vehicle,day,rentalBasis])
+            self.rentedvehicle.append([vehicle,day,rentalbasis])
         return (vehicle)
 
 
      
     def requestrentedvehicle(self):
-        if self.rentedVehicle:
-            for i in self.rentedVehicle:
+        if self.rentedvehicle:
+            for i in self.rentedvehicle:
                 print(i)
         else:
             print('You have not rented any Vehicle')
@@ -99,15 +99,15 @@ class Customer:
 
         vehicle = input("Enter Vehicle's License Number: ")
         
-        for i in self.rentedVehicle:
+        for i in self.rentedvehicle:
             if vehicle in i:
-                self.rentalTime = i[1]
-                self.rentalBasis = i[2]
+                self.rentaltime = i[1]
+                self.rentalbasis = i[2]
                 self.vehicle = [0]
-                self.rentedVehicle.remove(i)
+                self.rentedvehicle.remove(i)
 
                 print("you have Successfully return vehicle!")
-                return self.rentalTime
+                return self.rentaltime
                 
             else:
                 print("You have never rented this vehicle!")
